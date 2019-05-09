@@ -406,7 +406,8 @@ TASK is the parsed JSON response."
                (insert "** DONE ")
              (insert "** TODO ")))
           ((equal (format "%s" type) "daily")
-           (insert "** TODO "))
+           (cond ((eq completed :json-false) (insert "** TODO "))
+                 ((eq completed t) (insert "** DONE "))))
           (t
            (cond ((eq completed :json-false) (insert "** TODO "))
                  ((eq completed t) (insert "** DONE ")))))))
